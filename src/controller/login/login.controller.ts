@@ -6,7 +6,6 @@ import { MessageDto } from '../chat/dto/message';
 
 @Controller('login')
 export class LoginController {
-
   constructor(
     private loginService: LoginService,
   ) { }
@@ -19,4 +18,6 @@ export class LoginController {
   async GetUser(@Query('id') idUser: string) {
     return this.loginService.GetUser(parseInt(idUser));
   }
+
+  /* aquiii modificacion */
 }
