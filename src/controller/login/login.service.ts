@@ -80,10 +80,11 @@ export class LoginService {
         const pool = await connectToDatabase();
 
         // Inyección SQL posible
-        const query = `
-            SELECT * FROM users2 WHERE id = ${idUser}
-        `;
+        /*  const query = `
+             SELECT * FROM users2 WHERE id = ${idUser}
+         `; */
 
+        const query = `SELECT * FROM users2 WHERE id = '${idUser}'`;
         // Ejecutar la consulta
         const result = await pool.request()
             .query(query);
