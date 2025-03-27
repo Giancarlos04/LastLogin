@@ -3,6 +3,7 @@ import { LoginDto } from './dto/login';
 import { connectToDatabase } from 'src/db/Connection';
 import * as sql from 'mssql';
 import { JwtService } from '@nestjs/jwt';
+import { Console } from 'console';
 
 @Injectable()
 export class LoginService {
@@ -58,7 +59,10 @@ export class LoginService {
                     message: 'Invalid email or password'
                 }
             }
+
+
             const user = result.recordset[0];
+            console.log(result.recordset)
             const payload = { email: user.email, sub: user.id };
             const token = this.jwtService.sign(payload);
 
@@ -79,13 +83,15 @@ export class LoginService {
     async GetUser(idUser: Number) {
         const pool = await connectToDatabase();
 
+        console.log(idUser);
+
+
         // Inyección SQL posible
         /*  const query = `
              SELECT * FROM users2 WHERE id = ${idUser}
          `; */
 
         const query = `SELECT * FROM users2 WHERE id = '${idUser}'`;
-        // Ejecutar la consulta
         const result = await pool.request()
             .query(query);
 
